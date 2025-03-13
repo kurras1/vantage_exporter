@@ -1,0 +1,22 @@
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090'] 
+ - job_name: 'VANTAGE'
+    static_configs:
+      - targets: ['<IP OF VANTAGE SERVER>']
+        labels:
+          name: '<NAME OF VANTAGE SERVER>'     
+    scrape_interval: 60s
+    scrape_timeout: 60s
+    metrics_path: /metrics
+    params:
+      target_port: ['<PORT OF VANTAGE API>']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: <IP OF THE EXPORTER>:<PORT OF THE EXPORTER>
