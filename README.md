@@ -1,2 +1,2 @@
-# vantage_exporter
+# Telestream Vantage Exporter
 Telestream Vantage exporter for Prometheus
